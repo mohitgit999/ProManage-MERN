@@ -45,25 +45,27 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-3">
             <Link
               to="/dashboard"
-              className={`flex items-center gap-2 px-5 py-2 rounded-2xl text-sm font-semibold transition-all duration-300 border ${
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 border ${
                 isActive('/dashboard')
-                  ? 'bg-primary-500/10 text-primary-600 dark:text-primary-300 border-primary-500/20 shadow-lg shadow-primary-500/10'
-                  : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-main hover:bg-primary-500/5 shadow-sm'
+                  ? 'bg-primary-600 text-white border-primary-500 shadow-[0_8px_20px_-6px_rgba(217,70,239,0.5)] scale-105'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-white/10 hover:bg-white/10 backdrop-blur-md'
               }`}
+              style={!isActive('/dashboard') ? { background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' } : {}}
             >
               <HiOutlineViewGrid className="text-lg" />
               Dashboard
             </Link>
             <Link
               to="/about"
-              className={`flex items-center gap-2 px-5 py-2 rounded-2xl text-sm font-semibold transition-all duration-300 border ${
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 border ${
                 isAboutActive
-                  ? 'bg-primary-500/10 text-primary-600 dark:text-primary-300 border-primary-500/20'
-                  : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-main hover:bg-primary-500/5 shadow-sm'
+                  ? 'bg-primary-600 text-white border-primary-500 shadow-[0_8px_20px_-6px_rgba(217,70,239,0.5)] scale-105'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-white/10 hover:bg-white/10 backdrop-blur-md'
               }`}
+              style={!isAboutActive ? { background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' } : {}}
             >
               <HiOutlineInformationCircle className="text-lg" />
               About Us
