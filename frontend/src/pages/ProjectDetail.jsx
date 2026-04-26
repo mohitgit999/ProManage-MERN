@@ -369,13 +369,6 @@ const ProjectDetail = () => {
                   )}
                 </div>
 
-                {/* Quick add button */}
-                <button
-                  onClick={() => { setTaskForm((f) => ({ ...f, status: col.key })); setShowTaskForm(true); }}
-                  className="flex items-center gap-2 text-xs text-muted hover:text-main transition-colors px-3 py-2 rounded-xl hover:bg-primary-500/10 border border-transparent hover:border-main"
-                >
-                  <HiOutlinePlus /> Add task
-                </button>
               </div>
             );
           })}
