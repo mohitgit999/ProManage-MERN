@@ -8,7 +8,7 @@ import {
   HiOutlineExternalLink,
 } from 'react-icons/hi';
 import { MdOutlineFolder } from 'react-icons/md';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const priorityConfig = {
   low: { label: 'Low', class: 'badge-low' },
@@ -25,15 +25,30 @@ const statusConfig = {
 
 const ProjectCard = ({ project, onDelete, onUpdate }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [showStatusMenu, setShowStatusMenu] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const statusMenuRef = useRef(null);
+  
   const priority = priorityConfig[project.priority] || priorityConfig.medium;
   const status = statusConfig[project.status] || statusConfig.active;
+
+  // Close status menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (statusMenuRef.current && !statusMenuRef.current.contains(event.target)) {
+        setShowStatusMenu(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleStatusChange = async (newStatus) => {
     if (onUpdate && !isUpdating) {
       setIsUpdating(true);
       await onUpdate(project._id, { status: newStatus });
       setIsUpdating(false);
+      setShowStatusMenu(false);
     }
   };
 
@@ -61,7 +76,7 @@ const ProjectCard = ({ project, onDelete, onUpdate }) => {
           </div>
         </div>
 
-        {/* Menu */}
+        {/* Options Menu */}
         <div className="relative">
           <button
             onClick={() => setShowMenu(!showMenu)}
@@ -70,7 +85,7 @@ const ProjectCard = ({ project, onDelete, onUpdate }) => {
             <HiOutlineDotsVertical />
           </button>
           {showMenu && (
-            <div className="absolute right-0 top-8 bg-alt border border-main rounded-xl shadow-xl z-10 w-40 animate-fade-in" style={{ backgroundColor: 'var(--bg-alt)', borderColor: 'var(--border-color)' }}>
+            <div className="absolute right-0 top-8 bg-alt border border-main rounded-xl shadow-xl z-30 w-40 animate-fade-in" style={{ backgroundColor: 'var(--bg-alt)', borderColor: 'var(--border-color)' }}>
               <Link
                 to={`/projects/${project._id}`}
                 className="flex items-center gap-2 px-4 py-2.5 text-sm text-main hover:bg-primary-500/10 rounded-t-xl transition-colors"
@@ -96,30 +111,36 @@ const ProjectCard = ({ project, onDelete, onUpdate }) => {
         <p className="text-sm text-muted mb-4 line-clamp-2">{project.description}</p>
       )}
 
-      {/* Badges & Status Selector */}
+      {/* Badges & Clickable Status Selector */}
       <div className="flex flex-wrap gap-2 mb-4">
         <span className={`badge ${priority.class}`}>{priority.label}</span>
         
-        {/* Clickable Status Selector */}
-        <div className="relative inline-block group/status">
+        <div className="relative" ref={statusMenuRef}>
           <button 
-            className={`badge ${status.class} cursor-pointer hover:ring-2 ring-primary-500/50 transition-all flex items-center gap-1`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setShowStatusMenu(!showStatusMenu);
+            }}
+            className={`badge ${status.class} cursor-pointer hover:ring-2 ring-primary-500/50 transition-all flex items-center gap-1 active:scale-95`}
             disabled={isUpdating}
           >
-            {isUpdating ? '...' : status.label}
+            {isUpdating ? 'Updating...' : status.label}
           </button>
           
-          <div className="absolute left-0 top-full mt-1 hidden group-hover/status:block z-20 bg-alt border border-main rounded-lg shadow-xl min-w-[120px] overflow-hidden" style={{ backgroundColor: 'var(--bg-alt)', borderColor: 'var(--border-color)' }}>
-            {Object.entries(statusConfig).map(([key, config]) => (
-              <button
-                key={key}
-                onClick={() => handleStatusChange(key)}
-                className={`w-full text-left px-3 py-1.5 text-xs font-semibold hover:bg-primary-500/10 transition-colors ${project.status === key ? 'text-primary-500' : 'text-main'}`}
-              >
-                {config.label}
-              </button>
-            ))}
-          </div>
+          {showStatusMenu && (
+            <div className="absolute left-0 top-full mt-1 z-40 bg-alt border border-main rounded-lg shadow-2xl min-w-[130px] overflow-hidden animate-slide-up" style={{ backgroundColor: 'var(--bg-alt)', borderColor: 'var(--border-color)' }}>
+              {Object.entries(statusConfig).map(([key, config]) => (
+                <button
+                  key={key}
+                  onClick={() => handleStatusChange(key)}
+                  className={`w-full text-left px-3 py-2 text-xs font-bold hover:bg-primary-500/10 transition-colors ${project.status === key ? 'text-primary-500 bg-primary-500/5' : 'text-main'}`}
+                >
+                  {config.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

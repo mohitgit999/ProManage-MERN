@@ -41,9 +41,27 @@ const getProjects = asyncHandler(async (req, res) => {
   })
     .populate('owner', 'name email avatar')
     .populate('members', 'name email avatar')
-    .sort({ createdAt: -1 });
+    .sort({ createdAt: -1 })
+    .lean(); // Use lean for easier modification
 
-  res.json(projects);
+  // Smart Link: If project doesn't have a liveLink, check its tasks
+  const projectsWithLinks = await Promise.all(
+    projects.map(async (project) => {
+      if (!project.liveLink) {
+        const taskWithLink = await Task.findOne({
+          project: project._id,
+          liveLink: { $ne: '', $exists: true },
+        }).select('liveLink');
+        
+        if (taskWithLink) {
+          project.liveLink = taskWithLink.liveLink;
+        }
+      }
+      return project;
+    })
+  );
+
+  res.json(projectsWithLinks);
 });
 
 // @desc    Get single project by ID
