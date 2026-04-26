@@ -131,15 +131,15 @@ const ProjectCard = ({ project, onDelete }) => {
           )}
         </div>
         <div className="flex items-center gap-3">
-          {project.status === 'completed' && project.liveLink && (
+          {project.liveLink && (
             <a
-              href={project.liveLink}
+              href={project.liveLink.startsWith('http') ? project.liveLink : `https://${project.liveLink}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:opacity-80 font-bold transition-all px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20"
+              className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:scale-105 font-bold transition-all px-3 py-1.5 rounded-xl bg-blue-500/10 border-2 border-blue-500/30 shadow-[0_0_10px_rgba(59,130,246,0.2)]"
               onClick={(e) => e.stopPropagation()}
             >
-              Visit Live <HiOutlineExternalLink />
+              🚀 Visit Site
             </a>
           )}
           <Link
