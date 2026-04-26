@@ -35,7 +35,7 @@ const LandingPage = () => {
       {/* --- Stunning CSS Background (Theme Aware Orbs) --- */}
 
       {/* --- Hero Section --- */}
-      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 text-center pb-20">
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 text-center pt-24 pb-20">
         <div className="animate-slide-up max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-primary-500/10 text-primary-600 dark:text-primary-300 px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-bold border border-primary-500/20 mb-8 animate-fade-in">
             <span className="w-1.5 h-1.5 bg-primary-500 rounded-full animate-pulse" />
