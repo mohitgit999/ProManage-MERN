@@ -5,6 +5,7 @@ import {
   HiOutlineUsers,
   HiOutlineChevronRight,
   HiOutlineDotsVertical,
+  HiOutlineExternalLink,
 } from 'react-icons/hi';
 import { MdOutlineFolder } from 'react-icons/md';
 import { useState } from 'react';
@@ -129,12 +130,25 @@ const ProjectCard = ({ project, onDelete }) => {
             </span>
           )}
         </div>
-        <Link
-          to={`/projects/${project._id}`}
-          className="flex items-center gap-1 text-primary-600 dark:text-primary-400 hover:opacity-80 font-bold transition-all"
-        >
-          Open <HiOutlineChevronRight />
-        </Link>
+        <div className="flex items-center gap-3">
+          {project.status === 'completed' && project.liveLink && (
+            <a
+              href={project.liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:opacity-80 font-bold transition-all px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Visit Live <HiOutlineExternalLink />
+            </a>
+          )}
+          <Link
+            to={`/projects/${project._id}`}
+            className="flex items-center gap-1 text-primary-600 dark:text-primary-400 hover:opacity-80 font-bold transition-all"
+          >
+            Open <HiOutlineChevronRight />
+          </Link>
+        </div>
       </div>
     </div>
   );
