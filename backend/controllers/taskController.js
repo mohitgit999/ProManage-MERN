@@ -40,7 +40,19 @@ const createTask = asyncHandler(async (req, res) => {
     dueDate,
     checklist: checklist || [],
     tags: tags || [],
+    liveLink: req.body.liveLink || '',
+    githubLink: req.body.githubLink || '',
+    docLink: req.body.docLink || '',
   });
+
+  // Smart Sync: If task is "done" and has a link, update the project
+  if (task.status === 'done' && (task.liveLink || task.githubLink || task.docLink)) {
+    await Project.findByIdAndUpdate(project, {
+      liveLink: task.liveLink || undefined,
+      githubLink: task.githubLink || undefined,
+      docLink: task.docLink || undefined,
+    });
+  }
 
   await task.populate('assignedTo', 'name email avatar');
   await task.populate('createdBy', 'name email avatar');
@@ -128,8 +140,20 @@ const updateTask = asyncHandler(async (req, res) => {
   task.dueDate = dueDate !== undefined ? dueDate : task.dueDate;
   task.checklist = checklist !== undefined ? checklist : task.checklist;
   task.tags = tags !== undefined ? tags : task.tags;
+  task.liveLink = req.body.liveLink !== undefined ? req.body.liveLink : task.liveLink;
+  task.githubLink = req.body.githubLink !== undefined ? req.body.githubLink : task.githubLink;
+  task.docLink = req.body.docLink !== undefined ? req.body.docLink : task.docLink;
 
   const updated = await task.save();
+
+  // Smart Sync: If task is "done" and has a link, update the project
+  if (updated.status === 'done' && (updated.liveLink || updated.githubLink || updated.docLink)) {
+    await Project.findByIdAndUpdate(updated.project, {
+      liveLink: updated.liveLink || undefined,
+      githubLink: updated.githubLink || undefined,
+      docLink: updated.docLink || undefined,
+    });
+  }
   await updated.populate('assignedTo', 'name email avatar');
   await updated.populate('createdBy', 'name email avatar');
 
