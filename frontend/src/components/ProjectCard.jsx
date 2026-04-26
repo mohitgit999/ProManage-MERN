@@ -94,19 +94,19 @@ const ProjectCard = ({ project, onDelete }) => {
 
       {/* Links */}
       {(project.liveLink || project.githubLink || project.docLink) && (
-        <div className="flex flex-wrap gap-2 mb-4 pt-4 border-t border-main">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-2 mb-4 pt-4 border-t border-main">
           {project.liveLink && (
-            <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="text-xs bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 px-3 py-1.5 rounded-lg hover:bg-blue-500/20 transition-colors flex-1 text-center font-medium" onClick={(e) => e.stopPropagation()}>
-              🌍 Live Link
+            <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 px-3 py-1.5 rounded-lg hover:bg-blue-500/20 transition-colors flex-1 min-w-[80px] text-center font-bold" onClick={(e) => e.stopPropagation()}>
+              🌍 Live
             </a>
           )}
           {project.githubLink && (
-            <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="text-xs bg-gray-500/10 text-gray-600 dark:text-gray-300 border border-gray-500/20 px-3 py-1.5 rounded-lg hover:bg-gray-500/20 transition-colors flex-1 text-center font-medium" onClick={(e) => e.stopPropagation()}>
+            <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs bg-gray-500/10 text-gray-600 dark:text-gray-300 border border-gray-500/20 px-3 py-1.5 rounded-lg hover:bg-gray-500/20 transition-colors flex-1 min-w-[80px] text-center font-bold" onClick={(e) => e.stopPropagation()}>
               🐙 GitHub
             </a>
           )}
           {project.docLink && (
-            <a href={project.docLink} target="_blank" rel="noopener noreferrer" className="text-xs bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 px-3 py-1.5 rounded-lg hover:bg-purple-500/20 transition-colors flex-1 text-center font-medium" onClick={(e) => e.stopPropagation()}>
+            <a href={project.docLink} target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 px-3 py-1.5 rounded-lg hover:bg-purple-500/20 transition-colors flex-1 min-w-[80px] text-center font-bold" onClick={(e) => e.stopPropagation()}>
               📄 Docs
             </a>
           )}

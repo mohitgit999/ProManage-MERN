@@ -40,7 +40,7 @@ const LandingPage = () => {
       </div>
 
       {/* --- Minimalist Navigation --- */}
-      <nav className="relative z-10 px-6 py-6 lg:px-12 flex items-center justify-between">
+      <nav className="relative z-20 px-4 py-4 md:px-12 md:py-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
           <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-primary-500/50 transition-shadow">
             <MdOutlineTask className="text-white text-lg" />
@@ -64,18 +64,18 @@ const LandingPage = () => {
           </button>
 
           {user ? (
-            <Link to="/dashboard" className="btn-primary text-sm px-6 py-2 flex items-center gap-2">
-              Go to Dashboard <HiOutlineArrowRight />
+            <Link to="/dashboard" className="btn-primary text-xs sm:text-sm px-4 sm:px-6 py-2 flex items-center gap-2">
+              Dashboard <HiOutlineArrowRight className="hidden xs:block" />
             </Link>
           ) : (
-            <>
-              <Link to="/login" className="text-sm font-medium text-muted hover:text-main transition-colors">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Link to="/login" className="text-xs sm:text-sm font-medium text-muted hover:text-main transition-colors">
                 Log in
               </Link>
-              <Link to="/register" className="btn-primary text-sm px-6 py-2">
+              <Link to="/register" className="btn-primary text-xs sm:text-sm px-4 sm:px-6 py-2">
                 Sign up
               </Link>
-            </>
+            </div>
           )}
         </div>
       </nav>
@@ -91,8 +91,8 @@ const LandingPage = () => {
             ProManage 2.0 is now live
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-extrabold text-main tracking-tight mb-6 leading-tight">
-            Manage your projects <br/>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-main tracking-tight mb-6 leading-[1.1] sm:leading-tight">
+            Manage your projects <br className="hidden sm:block"/>
             <span className="text-gradient">with elegance.</span>
           </h1>
           

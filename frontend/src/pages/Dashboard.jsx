@@ -97,7 +97,7 @@ const Dashboard = () => {
         </div>
 
         {/* Filters & Search */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+        <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="relative flex-1">
             <HiOutlineSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
             <input
@@ -109,27 +109,29 @@ const Dashboard = () => {
               className="input-field pl-11"
             />
           </div>
-          <div className="flex gap-2">
-            {['all', 'active', 'completed', 'archived'].map((f) => (
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-hide no-scrollbar">
+            <div className="flex gap-2 min-w-max">
+              {['all', 'active', 'completed', 'archived'].map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setFilter(f)}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 capitalize border ${
+                    filter === f
+                      ? 'bg-primary-500 text-white border-primary-400 shadow-lg'
+                      : 'btn-secondary'
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
               <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all duration-300 capitalize border ${
-                  filter === f
-                    ? 'bg-primary-500 text-white border-primary-400 shadow-lg shadow-primary-500/20'
-                    : 'btn-secondary !py-2 !px-5'
-                }`}
+                onClick={() => setView(view === 'grid' ? 'list' : 'grid')}
+                className="btn-secondary !p-2 rounded-xl"
+                title="Toggle view"
               >
-                {f}
+                {view === 'grid' ? <HiOutlineViewList size={20} /> : <HiOutlineViewGrid size={20} />}
               </button>
-            ))}
-            <button
-              onClick={() => setView(view === 'grid' ? 'list' : 'grid')}
-              className="btn-secondary !p-2"
-              title="Toggle view"
-            >
-              {view === 'grid' ? <HiOutlineViewList className="text-lg" /> : <HiOutlineViewGrid className="text-lg" />}
-            </button>
+            </div>
           </div>
         </div>
 

@@ -127,41 +127,36 @@ const ProjectDetail = () => {
             <HiOutlineArrowLeft /> Back to Dashboard
           </button>
 
-          <div className="card p-6 animate-slide-up">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="card p-4 sm:p-6 animate-slide-up">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               <div className="flex items-center gap-4">
                 <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow-lg"
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl shadow-lg flex-shrink-0"
                   style={{ backgroundColor: project.color + '22', color: project.color }}
                 >
                   <MdOutlineFolder />
                 </div>
-                <div>
-                  <h1 className="text-xl font-bold text-main">{project.title}</h1>
+                <div className="min-w-0">
+                  <h1 className="text-xl sm:text-2xl font-bold text-main truncate">{project.title}</h1>
                   {project.description && (
-                    <p className="text-sm text-muted mt-0.5">{project.description}</p>
+                    <p className="text-sm text-muted mt-0.5 line-clamp-1">{project.description}</p>
                   )}
                 </div>
               </div>
-
-              <div className="flex flex-wrap items-center gap-3 text-sm text-muted">
+ 
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-muted">
                 {project.dueDate && (
-                  <span className="flex items-center gap-1.5 bg-alt px-3 py-1.5 rounded-lg border border-main">
-                    <HiOutlineCalendar />
+                  <span className="flex items-center gap-1.5 bg-alt px-3 py-2 rounded-xl border border-main">
+                    <HiOutlineCalendar className="text-base" />
                     {format(new Date(project.dueDate), 'MMM dd, yyyy')}
-                  </span>
-                )}
-                {project.members?.length > 0 && (
-                  <span className="flex items-center gap-1.5 bg-alt px-3 py-1.5 rounded-lg border border-main">
-                    <HiOutlineUsers />
-                    {project.members.length} member{project.members.length !== 1 ? 's' : ''}
                   </span>
                 )}
                 <button
                   onClick={() => setShowTaskForm(true)}
-                  className="btn-primary flex items-center gap-2 py-2 text-sm"
+                  className="btn-primary flex-1 sm:flex-none flex items-center justify-center gap-2 py-2.5 px-6 rounded-xl text-sm font-bold shadow-lg shadow-primary-500/20"
                 >
-                  <HiOutlinePlus /> Add Task
+                  <HiOutlinePlus className="text-lg" />
+                  Add Task
                 </button>
               </div>
             </div>
@@ -340,7 +335,7 @@ const ProjectDetail = () => {
         )}
 
         {/* Kanban Board */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {COLUMNS.map((col) => {
             const colTasks = getColumnTasks(col.key);
             return (
