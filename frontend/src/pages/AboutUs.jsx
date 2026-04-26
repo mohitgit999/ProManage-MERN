@@ -1,6 +1,6 @@
 import { HiOutlineLightBulb, HiOutlineSparkles, HiOutlineLightningBolt, HiOutlineShieldCheck } from 'react-icons/hi';
-import mohitAvatar from '/mohit_avatar_1777224438036.png';
-import yuktiAvatar from '/yukti_avatar_1777224453742.png';
+const mohitAvatar = '/mohit_avatar.png';
+const yuktiAvatar = '/yukti_avatar.png';
 
 const AboutUs = () => {
   return (
