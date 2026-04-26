@@ -10,17 +10,17 @@
 }
 
 .light {
-  --bg-main: #f1f5f9;
+  --bg-main: #e2e8f0;
   --bg-alt: #ffffff;
   --bg-card: #ffffff;
   --text-main: #0f172a;
-  --text-muted: #475569;
-  --border-color: rgba(0, 0, 0, 0.1);
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(0, 0, 0, 0.12);
+  --text-muted: #334155;
+  --border-color: rgba(0, 0, 0, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(0, 0, 0, 0.2);
   --input-bg: #ffffff;
-  --sidebar-hover: rgba(217, 70, 239, 0.1);
-  --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  --sidebar-hover: rgba(217, 70, 239, 0.15);
+  --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
 }
 
 .dark {
