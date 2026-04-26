@@ -79,18 +79,20 @@ const Dashboard = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {[
-            { label: 'Total Projects', value: stats.total, icon: <MdOutlineFolder />, color: 'text-primary-400' },
-            { label: 'Active', value: stats.active, icon: <HiOutlineChartBar />, color: 'text-green-500 dark:text-green-400' },
-            { label: 'Completed', value: stats.completed, icon: <HiOutlineViewGrid />, color: 'text-blue-500 dark:text-blue-400' },
-            { label: 'Owned by Me', value: stats.owned, icon: <HiOutlineViewList />, color: 'text-purple-500 dark:text-purple-400' },
+            { label: 'Total Projects', value: projects.length, icon: <HiOutlineViewGrid />, color: 'text-blue-500', bg: 'bg-blue-500/10' },
+            { label: 'Active Tasks', value: stats.active, icon: <HiOutlineClock />, color: 'text-amber-500', bg: 'bg-amber-500/10' },
+            { label: 'Completed', value: stats.completed, icon: <HiOutlineCheckCircle />, color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+            { label: 'Pending Issues', value: stats.issues, icon: <HiOutlineExclamationCircle />, color: 'text-rose-500', bg: 'bg-rose-500/10' },
           ].map((stat, i) => (
-            <div key={stat.label} className="card p-4 flex items-center gap-3">
-              <div className={`text-2xl ${stat.color}`}>{stat.icon}</div>
+            <div key={i} className="card p-4 sm:p-5 flex items-center gap-4 animate-slide-up" style={{ animationDelay: `${i * 0.1}s` }}>
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${stat.bg} ${stat.color} flex items-center justify-center text-xl sm:text-2xl shadow-inner`}>
+                {stat.icon}
+              </div>
               <div>
-                <p className="text-2xl font-bold text-main">{stat.value}</p>
-                <p className="text-xs text-muted">{stat.label}</p>
+                <p className="text-xs font-medium text-muted mb-0.5">{stat.label}</p>
+                <p className="text-lg sm:text-2xl font-bold text-main">{stat.value}</p>
               </div>
             </div>
           ))}

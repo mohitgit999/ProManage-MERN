@@ -42,10 +42,10 @@ const LandingPage = () => {
       {/* --- Minimalist Navigation --- */}
       <nav className="relative z-20 px-4 py-4 md:px-12 md:py-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-primary-500/50 transition-shadow">
-            <MdOutlineTask className="text-white text-lg" />
+          <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-primary-500/50 transition-shadow">
+            <MdOutlineTask className="text-white text-base sm:text-lg" />
           </div>
-          <span className="font-bold text-xl text-main tracking-wide">ProManage</span>
+          <span className="text-lg sm:text-xl font-bold text-main tracking-tight">ProManage</span>
         </Link>
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted">
@@ -83,20 +83,17 @@ const LandingPage = () => {
       {/* --- Hero Section --- */}
       <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 text-center pb-20">
         <div className="animate-slide-up max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-500/10 border border-primary-500/20 backdrop-blur-md mb-8 text-xs font-medium text-primary-600 dark:text-primary-300">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
-            </span>
+          <div className="inline-flex items-center gap-2 bg-primary-500/10 text-primary-600 dark:text-primary-300 px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-bold border border-primary-500/20 mb-8 animate-fade-in">
+            <span className="w-1.5 h-1.5 bg-primary-500 rounded-full animate-pulse" />
             ProManage 2.0 is now live
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-main tracking-tight mb-6 leading-[1.1] sm:leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-main tracking-tight mb-6 leading-[1.2] sm:leading-tight">
             Manage your projects <br className="hidden sm:block"/>
             <span className="text-gradient">with elegance.</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-muted mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-lg md:text-xl text-muted max-w-2xl mx-auto mb-10 leading-relaxed px-4">
             The beautifully simple, distraction-free project management tool designed for modern teams who appreciate great design.
           </p>
 
