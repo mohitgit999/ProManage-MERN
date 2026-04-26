@@ -2,12 +2,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { MdOutlineTask } from 'react-icons/md';
-import { HiOutlineArrowRight } from 'react-icons/hi';
+import { HiOutlineArrowRight, HiOutlineSun, HiOutlineMoon } from 'react-icons/hi';
+import { useTheme } from '../context/ThemeContext';
 
 const LandingPage = () => {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   const handleGetStarted = (e) => {
     e.preventDefault();
@@ -53,6 +55,14 @@ const LandingPage = () => {
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-xl bg-alt/50 border border-main text-main hover:bg-alt transition-all duration-300 mr-2"
+            title="Toggle theme"
+          >
+            {theme === 'dark' ? <HiOutlineSun size={20} /> : <HiOutlineMoon size={20} />}
+          </button>
+
           {user ? (
             <Link to="/dashboard" className="btn-primary text-sm px-6 py-2 flex items-center gap-2">
               Go to Dashboard <HiOutlineArrowRight />

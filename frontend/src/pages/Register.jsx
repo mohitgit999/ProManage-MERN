@@ -8,13 +8,17 @@ import {
   HiOutlineUser,
   HiOutlineEye,
   HiOutlineEyeOff,
+  HiOutlineSun,
+  HiOutlineMoon,
 } from 'react-icons/hi';
+import { useTheme } from '../context/ThemeContext';
 
 const Register = () => {
   const { register, loading } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
@@ -35,7 +39,14 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-main">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-main relative">
+      <button
+        onClick={toggleTheme}
+        className="absolute top-6 right-6 p-3 rounded-2xl bg-alt/50 border border-main text-main hover:bg-alt transition-all duration-300 z-50 shadow-xl"
+        title="Toggle theme"
+      >
+        {theme === 'dark' ? <HiOutlineSun size={24} /> : <HiOutlineMoon size={24} />}
+      </button>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary-600/10 rounded-full blur-3xl dark:bg-primary-600/20" />
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl dark:bg-purple-600/20" />

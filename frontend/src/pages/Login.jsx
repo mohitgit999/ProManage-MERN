@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { MdOutlineTask } from 'react-icons/md';
-import { HiOutlineMail, HiOutlineLockClosed, HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
+import { HiOutlineMail, HiOutlineLockClosed, HiOutlineEye, HiOutlineEyeOff, HiOutlineSun, HiOutlineMoon } from 'react-icons/hi';
+import { useTheme } from '../context/ThemeContext';
 
 const Login = () => {
   const { login, loading } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +21,14 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-main">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-main relative">
+      <button
+        onClick={toggleTheme}
+        className="absolute top-6 right-6 p-3 rounded-2xl bg-alt/50 border border-main text-main hover:bg-alt transition-all duration-300 z-50 shadow-xl"
+        title="Toggle theme"
+      >
+        {theme === 'dark' ? <HiOutlineSun size={24} /> : <HiOutlineMoon size={24} />}
+      </button>
       {/* Background gradient */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary-600/10 rounded-full blur-3xl dark:bg-primary-600/20" />
