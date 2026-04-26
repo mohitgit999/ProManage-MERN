@@ -21,6 +21,9 @@ const createProject = asyncHandler(async (req, res) => {
     dueDate,
     priority: priority || 'medium',
     color: color || '#6366f1',
+    liveLink: req.body.liveLink || '',
+    githubLink: req.body.githubLink || '',
+    docLink: req.body.docLink || '',
   });
 
   await project.populate('owner', 'name email avatar');
@@ -96,6 +99,9 @@ const updateProject = asyncHandler(async (req, res) => {
   project.color = color || project.color;
   project.status = status || project.status;
   project.members = members !== undefined ? members : project.members;
+  project.liveLink = req.body.liveLink !== undefined ? req.body.liveLink : project.liveLink;
+  project.githubLink = req.body.githubLink !== undefined ? req.body.githubLink : project.githubLink;
+  project.docLink = req.body.docLink !== undefined ? req.body.docLink : project.docLink;
 
   const updated = await project.save();
   await updated.populate('owner', 'name email avatar');

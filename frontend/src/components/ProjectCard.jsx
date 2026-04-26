@@ -23,10 +23,19 @@ const statusConfig = {
   archived: { label: 'Archived', class: 'badge-backlog' },
 };
 
-const ProjectCard = ({ project, onDelete }) => {
+const ProjectCard = ({ project, onDelete, onUpdate }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
   const priority = priorityConfig[project.priority] || priorityConfig.medium;
   const status = statusConfig[project.status] || statusConfig.active;
+
+  const handleStatusChange = async (newStatus) => {
+    if (onUpdate && !isUpdating) {
+      setIsUpdating(true);
+      await onUpdate(project._id, { status: newStatus });
+      setIsUpdating(false);
+    }
+  };
 
   return (
     <div
@@ -87,49 +96,35 @@ const ProjectCard = ({ project, onDelete }) => {
         <p className="text-sm text-muted mb-4 line-clamp-2">{project.description}</p>
       )}
 
-      {/* Badges */}
+      {/* Badges & Status Selector */}
       <div className="flex flex-wrap gap-2 mb-4">
         <span className={`badge ${priority.class}`}>{priority.label}</span>
-        <span className={`badge ${status.class}`}>{status.label}</span>
+        
+        {/* Clickable Status Selector */}
+        <div className="relative inline-block group/status">
+          <button 
+            className={`badge ${status.class} cursor-pointer hover:ring-2 ring-primary-500/50 transition-all flex items-center gap-1`}
+            disabled={isUpdating}
+          >
+            {isUpdating ? '...' : status.label}
+          </button>
+          
+          <div className="absolute left-0 top-full mt-1 hidden group-hover/status:block z-20 bg-alt border border-main rounded-lg shadow-xl min-w-[120px] overflow-hidden" style={{ backgroundColor: 'var(--bg-alt)', borderColor: 'var(--border-color)' }}>
+            {Object.entries(statusConfig).map(([key, config]) => (
+              <button
+                key={key}
+                onClick={() => handleStatusChange(key)}
+                className={`w-full text-left px-3 py-1.5 text-xs font-semibold hover:bg-primary-500/10 transition-colors ${project.status === key ? 'text-primary-500' : 'text-main'}`}
+              >
+                {config.label}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* Links */}
-      {(project.liveLink || project.githubLink || project.docLink) && (
-        <div className="flex flex-col sm:flex-row flex-wrap gap-2 mb-4 pt-4 border-t border-main">
-          {project.liveLink && (
-            <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 px-3 py-1.5 rounded-lg hover:bg-blue-500/20 transition-colors flex-1 min-w-[80px] text-center font-bold" onClick={(e) => e.stopPropagation()}>
-              🌍 Live
-            </a>
-          )}
-          {project.githubLink && (
-            <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs bg-gray-500/10 text-gray-600 dark:text-gray-300 border border-gray-500/20 px-3 py-1.5 rounded-lg hover:bg-gray-500/20 transition-colors flex-1 min-w-[80px] text-center font-bold" onClick={(e) => e.stopPropagation()}>
-              🐙 GitHub
-            </a>
-          )}
-          {project.docLink && (
-            <a href={project.docLink} target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 px-3 py-1.5 rounded-lg hover:bg-purple-500/20 transition-colors flex-1 min-w-[80px] text-center font-bold" onClick={(e) => e.stopPropagation()}>
-              📄 Docs
-            </a>
-          )}
-        </div>
-      )}
-
       {/* Footer */}
-      <div className="flex items-center justify-between text-xs text-muted">
-        <div className="flex items-center gap-3">
-          {project.dueDate && (
-            <span className="flex items-center gap-1">
-              <HiOutlineCalendar />
-              {format(new Date(project.dueDate), 'MMM dd')}
-            </span>
-          )}
-          {project.members?.length > 0 && (
-            <span className="flex items-center gap-1">
-              <HiOutlineUsers />
-              {project.members.length} member{project.members.length !== 1 ? 's' : ''}
-            </span>
-          )}
-        </div>
+      <div className="flex items-center justify-between text-xs text-muted pt-4 border-t border-main">
         <div className="flex items-center gap-3">
           {project.liveLink && (
             <a
@@ -142,6 +137,8 @@ const ProjectCard = ({ project, onDelete }) => {
               🚀 Visit Site
             </a>
           )}
+        </div>
+        <div className="flex items-center gap-3">
           <Link
             to={`/projects/${project._id}`}
             className="flex items-center gap-1 text-primary-600 dark:text-primary-400 hover:opacity-80 font-bold transition-all"

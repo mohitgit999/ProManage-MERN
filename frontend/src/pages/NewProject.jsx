@@ -168,21 +168,21 @@ const NewProject = () => {
               <p className="text-sm font-medium text-muted mb-3">Links & Resources (Optional)</p>
               <div className="space-y-3">
                 <input
-                  type="url"
-                  placeholder="Live Link (e.g., https://myapp.com)"
+                  type="text"
+                  placeholder="Live Link (e.g., myapp.com)"
                   value={form.liveLink}
                   onChange={(e) => setForm({ ...form, liveLink: e.target.value })}
                   className="input-field"
                 />
                 <input
-                  type="url"
+                  type="text"
                   placeholder="GitHub Repository Link"
                   value={form.githubLink}
                   onChange={(e) => setForm({ ...form, githubLink: e.target.value })}
                   className="input-field"
                 />
                 <input
-                  type="url"
+                  type="text"
                   placeholder="Documentation Link"
                   value={form.docLink}
                   onChange={(e) => setForm({ ...form, docLink: e.target.value })}

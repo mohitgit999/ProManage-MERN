@@ -49,6 +49,16 @@ const Dashboard = () => {
     }
   };
 
+  const handleUpdateProject = async (id, updates) => {
+    try {
+      const { data } = await axios.put(`/projects/${id}`, updates);
+      setProjects((prev) => prev.map((p) => (p._id === id ? data : p)));
+      toast.success('Project updated! ✨');
+    } catch {
+      toast.error('Failed to update project');
+    }
+  };
+
   const filteredProjects = projects.filter((p) => {
     const matchSearch = p.title.toLowerCase().includes(search.toLowerCase());
     const matchFilter = filter === 'all' || p.status === filter;
@@ -190,6 +200,7 @@ const Dashboard = () => {
                 key={project._id}
                 project={project}
                 onDelete={handleDeleteProject}
+                onUpdate={handleUpdateProject}
               />
             ))}
           </div>
