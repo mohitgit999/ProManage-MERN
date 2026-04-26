@@ -138,6 +138,8 @@
   .badge-medium { @apply bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border border-yellow-500/20; }
   .badge-high { @apply bg-orange-500/10 text-orange-600 dark:text-orange-400 border border-orange-500/20; }
   .badge-critical { @apply bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20; }
+  .badge-in-progress { @apply bg-primary-500/10 text-primary-600 dark:text-primary-300 border border-primary-500/20; }
+  .badge-done { @apply bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20; }
 
   .glass {
     background: var(--glass-bg);
