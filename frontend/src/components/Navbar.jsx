@@ -50,8 +50,8 @@ const Navbar = () => {
               to="/dashboard"
               className={`flex items-center gap-2 px-5 py-2 rounded-2xl text-sm font-semibold transition-all duration-300 border ${
                 isActive('/dashboard')
-                  ? 'bg-primary-500/10 text-primary-600 dark:text-primary-300 border-primary-500/20'
-                  : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-transparent hover:bg-primary-500/5'
+                  ? 'bg-primary-500/10 text-primary-600 dark:text-primary-300 border-primary-500/20 shadow-lg shadow-primary-500/10'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-main hover:bg-primary-500/5 shadow-sm'
               }`}
             >
               <HiOutlineViewGrid className="text-lg" />
