@@ -10,6 +10,7 @@ import {
   HiOutlineX,
   HiOutlineSun,
   HiOutlineMoon,
+  HiOutlineInformationCircle,
 } from 'react-icons/hi';
 import { MdOutlineTask } from 'react-icons/md';
 import { useState } from 'react';
@@ -56,11 +57,11 @@ const Navbar = () => {
               Dashboard
             </Link>
             <Link
-              to="/projects/new"
-              className="ml-2 bg-gradient-to-r from-primary-500 to-purple-600 hover:from-primary-400 hover:to-purple-500 text-white text-sm font-bold flex items-center gap-2 py-2 px-6 rounded-2xl shadow-[0_0_20px_rgba(217,70,239,0.3)] hover:shadow-[0_0_30px_rgba(217,70,239,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
+              to="/#about"
+              className="flex items-center gap-2 px-5 py-2 rounded-2xl text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-primary-600 border border-transparent hover:bg-primary-500/5 transition-all duration-300"
             >
-              <HiOutlinePlus className="text-lg" />
-              New Project
+              <HiOutlineInformationCircle className="text-lg" />
+              About Us
             </Link>
           </div>
 
@@ -128,11 +129,11 @@ const Navbar = () => {
               <HiOutlineViewGrid /> Dashboard
             </Link>
             <Link
-              to="/projects/new"
+              to="/#about"
               className="sidebar-link"
               onClick={() => setMenuOpen(false)}
             >
-              <HiOutlinePlus /> New Project
+              <HiOutlineInformationCircle /> About Us
             </Link>
             <div className="border-t border-gray-200 dark:border-gray-800 pt-2 mt-2">
               <Link
