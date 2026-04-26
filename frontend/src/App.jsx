@@ -13,6 +13,7 @@ import ProjectDetail from './pages/ProjectDetail';
 import NewProject from './pages/NewProject';
 import LandingPage from './pages/LandingPage';
 import Settings from './pages/Settings';
+import AdminDashboard from './pages/AdminDashboard';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -57,6 +58,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <ProjectDetail />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin-dashboard"
+              element={
+                <PrivateRoute>
+                  <AdminDashboard />
                 </PrivateRoute>
               }
             />

@@ -17,6 +17,7 @@ const Register = () => {
   const { register, loading } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' });
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const [error, setError] = useState('');
@@ -33,8 +34,8 @@ const Register = () => {
       return;
     }
     try {
-      await register(form.name, form.email, form.password);
-      navigate('/dashboard');
+      await register(form.name, form.email, form.password, isAdmin);
+      navigate(isAdmin ? '/admin-dashboard' : '/dashboard');
     } catch {}
   };
 
@@ -65,6 +66,24 @@ const Register = () => {
         <div className="card p-8">
           <h2 className="text-xl font-bold text-main mb-2">Create your account</h2>
           <p className="text-muted text-sm mb-6">Get started for free today</p>
+
+          {/* Role Selection */}
+          <div className="flex bg-alt rounded-2xl p-1 mb-6 border border-main">
+            <button
+              type="button"
+              onClick={() => setIsAdmin(false)}
+              className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${!isAdmin ? 'bg-primary-600 text-white shadow-lg' : 'text-muted hover:text-main'}`}
+            >
+              Standard User
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsAdmin(true)}
+              className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${isAdmin ? 'bg-purple-600 text-white shadow-lg' : 'text-muted hover:text-main'}`}
+            >
+              Admin Terminal
+            </button>
+          </div>
 
           {error && (
             <div className="bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 rounded-xl px-4 py-3 text-sm mb-4 animate-fade-in">

@@ -10,6 +10,7 @@ import {
   HiOutlineX,
   HiOutlineSun,
   HiOutlineMoon,
+  HiOutlineServer,
 } from 'react-icons/hi';
 import { MdOutlineTask } from 'react-icons/md';
 import { useState } from 'react';
@@ -55,6 +56,19 @@ const Navbar = () => {
               <HiOutlineViewGrid className="text-lg" />
               Dashboard
             </Link>
+            {user?.isAdmin && (
+              <Link
+                to="/admin-dashboard"
+                className={`flex items-center gap-2 px-5 py-2 rounded-2xl text-sm font-semibold transition-all duration-300 border ${
+                  isActive('/admin-dashboard')
+                    ? 'bg-purple-500/10 text-purple-600 dark:text-purple-300 border-purple-500/20'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-purple-600 border-transparent hover:bg-purple-500/5'
+                }`}
+              >
+                <HiOutlineServer className="text-lg" />
+                Admin Terminal
+              </Link>
+            )}
             <Link
               to="/projects/new"
               className="ml-2 bg-gradient-to-r from-primary-500 to-purple-600 hover:from-primary-400 hover:to-purple-500 text-white text-sm font-bold flex items-center gap-2 py-2 px-6 rounded-2xl shadow-[0_0_20px_rgba(217,70,239,0.3)] hover:shadow-[0_0_30px_rgba(217,70,239,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
@@ -127,6 +141,15 @@ const Navbar = () => {
             >
               <HiOutlineViewGrid /> Dashboard
             </Link>
+            {user?.isAdmin && (
+              <Link
+                to="/admin-dashboard"
+                className="sidebar-link"
+                onClick={() => setMenuOpen(false)}
+              >
+                <HiOutlineServer /> Admin Terminal
+              </Link>
+            )}
             <Link
               to="/projects/new"
               className="sidebar-link"

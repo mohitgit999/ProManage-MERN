@@ -28,10 +28,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async (name, email, password) => {
+  const register = async (name, email, password, isAdmin = false) => {
     setLoading(true);
     try {
-      const { data } = await axios.post('/auth/register', { name, email, password });
+      const { data } = await axios.post('/auth/register', { name, email, password, isAdmin });
       setUser(data);
       localStorage.setItem('userInfo', JSON.stringify(data));
       toast.success(`Welcome to Pro Manage, ${data.name}! 🎉`);

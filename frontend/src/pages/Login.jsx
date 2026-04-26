@@ -9,14 +9,15 @@ const Login = () => {
   const { login, loading } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: '', password: '' });
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(form.email, form.password);
-      navigate('/dashboard');
+      const user = await login(form.email, form.password);
+      navigate(user.isAdmin ? '/admin-dashboard' : '/dashboard');
     } catch {}
   };
 
@@ -47,8 +48,29 @@ const Login = () => {
 
         {/* Card */}
         <div className="card p-8">
-          <h2 className="text-xl font-bold text-main mb-2">Welcome back</h2>
-          <p className="text-muted text-sm mb-6">Sign in to your account</p>
+          <div className="flex bg-alt rounded-2xl p-1 mb-6 border border-main">
+            <button
+              type="button"
+              onClick={() => setIsAdmin(false)}
+              className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${!isAdmin ? 'bg-primary-600 text-white shadow-lg' : 'text-muted hover:text-main'}`}
+            >
+              User Login
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsAdmin(true)}
+              className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${isAdmin ? 'bg-purple-600 text-white shadow-lg' : 'text-muted hover:text-main'}`}
+            >
+              Admin Login
+            </button>
+          </div>
+
+          <h2 className="text-xl font-bold text-main mb-2">
+            {isAdmin ? 'Admin Terminal' : 'Welcome back'}
+          </h2>
+          <p className="text-muted text-sm mb-6">
+            {isAdmin ? 'Access administrative controls' : 'Sign in to your account'}
+          </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
