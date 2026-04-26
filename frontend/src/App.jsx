@@ -15,6 +15,7 @@ import LandingPage from './pages/LandingPage';
 import Settings from './pages/Settings';
 import AboutUs from './pages/AboutUs';
 import NotFound from './pages/NotFound';
+import AdminAnalytics from './pages/AdminAnalytics';
 
 function App() {
   return (
@@ -59,6 +60,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <ProjectDetail />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/analytics"
+              element={
+                <PrivateRoute>
+                  <AdminAnalytics />
                 </PrivateRoute>
               }
             />

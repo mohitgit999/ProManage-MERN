@@ -1,10 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { MdOutlineTask } from 'react-icons/md';
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import { useTheme } from '../context/ThemeContext';
 import Navbar from '../components/Navbar';
+import axios from '../api/axios';
 
 const LandingPage = () => {
   const [email, setEmail] = useState('');
@@ -16,12 +17,16 @@ const LandingPage = () => {
   const handleGetStarted = (e) => {
     e.preventDefault();
     if (email) {
-      // In a real app, you might pass this email to the register page
       navigate('/register', { state: { email } });
     } else {
       navigate('/register');
     }
   };
+
+  // Track this visit
+  useEffect(() => {
+    axios.post('/analytics/track', {}, { params: { page: '/' } }).catch(() => {});
+  }, []);
 
   return (
     <div className="min-h-screen relative overflow-hidden flex flex-col bg-main">

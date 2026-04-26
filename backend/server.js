@@ -31,6 +31,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
 app.use('/api/tasks', require('./routes/taskRoutes'));
+app.use('/api/analytics', require('./routes/analyticsRoutes'));
 
 // Error handling middleware (must be after routes)
 app.use(notFound);
