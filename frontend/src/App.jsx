@@ -13,6 +13,8 @@ import ProjectDetail from './pages/ProjectDetail';
 import NewProject from './pages/NewProject';
 import LandingPage from './pages/LandingPage';
 import Settings from './pages/Settings';
+import AdminDashboard from './pages/AdminDashboard';
+import AboutUs from './pages/AboutUs';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<LandingPage />} />
+            <Route path="/about" element={<AboutUs />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 

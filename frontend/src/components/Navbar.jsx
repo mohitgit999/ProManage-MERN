@@ -21,7 +21,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isAboutActive = location.hash === '#about';
+  const isAboutActive = location.pathname === '/about';
 
   const handleLogout = () => {
     logout();
@@ -58,7 +58,7 @@ const Navbar = () => {
               Dashboard
             </Link>
             <Link
-              to="/#about"
+              to="/about"
               className={`flex items-center gap-2 px-5 py-2 rounded-2xl text-sm font-semibold transition-all duration-300 border ${
                 isAboutActive
                   ? 'bg-primary-500/10 text-primary-600 dark:text-primary-300 border-primary-500/20'
@@ -134,7 +134,7 @@ const Navbar = () => {
               <HiOutlineViewGrid /> Dashboard
             </Link>
             <Link
-              to="/#about"
+              to="/about"
               className={`sidebar-link ${isAboutActive ? 'bg-primary-500/10 text-primary-600' : ''}`}
               onClick={() => setMenuOpen(false)}
             >
