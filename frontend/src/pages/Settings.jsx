@@ -45,7 +45,6 @@ const Settings = () => {
   };
 
   return (
-  return (
     <div className="min-h-screen pt-28 pb-12 px-4 bg-main">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-main mb-8 animate-slide-up">Account Settings</h1>
