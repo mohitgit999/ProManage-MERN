@@ -1,4 +1,5 @@
 const Visit = require('../models/Visit');
+const User = require('../models/User');
 
 const ADMIN_EMAIL = 'SEARX@gmail.com';
 
@@ -48,7 +49,7 @@ const getAnalytics = async (req, res) => {
     const last7d = new Date(now - 7 * 24 * 60 * 60 * 1000);
     const last30d = new Date(now - 30 * 24 * 60 * 60 * 1000);
 
-    const [total, today, week, month, recentVisits, byDevice, byBrowser, byPage, dailyVisits] = await Promise.all([
+    const [total, today, week, month, recentVisits, byDevice, byBrowser, byPage, dailyVisits, totalUsers, usersList] = await Promise.all([
       Visit.countDocuments(),
       Visit.countDocuments({ createdAt: { $gte: last24h } }),
       Visit.countDocuments({ createdAt: { $gte: last7d } }),
@@ -67,9 +68,11 @@ const getAnalytics = async (req, res) => {
         },
         { $sort: { _id: 1 } },
       ]),
+      User.countDocuments(),
+      User.find({}, 'name email createdAt').sort({ createdAt: -1 }),
     ]);
 
-    res.json({ total, today, week, month, recentVisits, byDevice, byBrowser, byPage, dailyVisits });
+    res.json({ total, today, week, month, recentVisits, byDevice, byBrowser, byPage, dailyVisits, totalUsers, usersList });
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
