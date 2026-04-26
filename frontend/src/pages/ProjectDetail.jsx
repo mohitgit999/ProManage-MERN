@@ -12,8 +12,11 @@ import {
   HiOutlineUsers,
   HiOutlineX,
   HiOutlineCheck,
+  HiOutlineExternalLink,
 } from 'react-icons/hi';
-import { MdOutlineFolder } from 'react-icons/md';
+import { MdOutlineFolder, MdOutlineRocketLaunch } from 'react-icons/md';
+import { VscGithub } from 'react-icons/vsc';
+import { HiOutlineDocumentText } from 'react-icons/hi2';
 
 const COLUMNS = [
   { key: 'tasks', label: 'Tasks', color: 'border-blue-600' },
@@ -377,6 +380,59 @@ const ProjectDetail = () => {
             );
           })}
         </div>
+
+        {/* --- Project Launchpad (Bottom Card) --- */}
+        {(project.liveLink || project.githubLink || project.docLink) && (
+          <div className="mt-12 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+            <div className="card p-8 border-2 border-primary-500/20 shadow-[0_0_40px_rgba(217,70,239,0.1)]">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div>
+                  <div className="inline-flex items-center gap-2 bg-primary-500/10 text-primary-500 px-3 py-1.5 rounded-full text-xs font-bold border border-primary-500/20 mb-3">
+                    <MdOutlineRocketLaunch className="text-sm" /> Project Launchpad
+                  </div>
+                  <h2 className="text-2xl font-bold text-main">Ready to see your work?</h2>
+                  <p className="text-muted mt-1">Access your live site, code repository, and documentation below.</p>
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  {project.liveLink && (
+                    <a
+                      href={project.liveLink.startsWith('http') ? project.liveLink : `https://${project.liveLink}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 sm:flex-none flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-primary-600 to-purple-600 text-white font-extrabold text-sm shadow-xl shadow-primary-500/25 hover:scale-105 active:scale-95 transition-all group"
+                    >
+                      🚀 Launch Project
+                      <HiOutlineExternalLink className="text-lg group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </a>
+                  )}
+                  {project.githubLink && (
+                    <a
+                      href={project.githubLink.startsWith('http') ? project.githubLink : `https://${project.githubLink}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 sm:flex-none flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-alt border-2 border-main hover:border-primary-500 text-main font-bold text-sm transition-all hover:bg-primary-500/5 group"
+                    >
+                      <VscGithub className="text-xl" />
+                      View Code
+                    </a>
+                  )}
+                  {project.docLink && (
+                    <a
+                      href={project.docLink.startsWith('http') ? project.docLink : `https://${project.docLink}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 sm:flex-none flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-alt border-2 border-main hover:border-blue-500 text-main font-bold text-sm transition-all hover:bg-blue-500/5 group"
+                    >
+                      <HiOutlineDocumentText className="text-xl" />
+                      Docs
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
