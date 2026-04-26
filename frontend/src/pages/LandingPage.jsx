@@ -2,8 +2,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { MdOutlineTask } from 'react-icons/md';
-import { HiOutlineArrowRight, HiOutlineSun, HiOutlineMoon, HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
+import { HiOutlineArrowRight } from 'react-icons/hi';
 import { useTheme } from '../context/ThemeContext';
+import Navbar from '../components/Navbar';
 
 const LandingPage = () => {
   const [email, setEmail] = useState('');
@@ -24,95 +25,9 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden flex flex-col bg-main">
+      <Navbar />
+      
       {/* --- Stunning CSS Background (Theme Aware Orbs) --- */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary-600/10 dark:bg-primary-600/20 blur-[120px] animate-float-slow" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/10 dark:bg-purple-600/20 blur-[150px] animate-float-delayed" />
-        <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-blue-600/5 dark:bg-blue-600/10 blur-[100px] animate-float" />
-        
-        {/* Subtle grid pattern overlay for texture */}
-        <div 
-          className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]" 
-          style={{ 
-            backgroundImage: `radial-gradient(currentColor 1px, transparent 1px)`, 
-            backgroundSize: '32px 32px' 
-          }} 
-        />
-      </div>
-
-      {/* --- Mobile Menu Drawer --- */}
-      {menuOpen && (
-        <div className="md:hidden fixed inset-0 z-[100] bg-main/95 backdrop-blur-xl animate-fade-in flex flex-col">
-          <div className="flex items-center justify-between px-4 py-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <MdOutlineTask className="text-white" />
-              </div>
-              <span className="font-bold text-main">ProManage</span>
-            </div>
-            <button onClick={() => setMenuOpen(false)} className="p-2 text-main">
-              <HiOutlineX size={28} />
-            </button>
-          </div>
-          <div className="flex flex-col items-center justify-center flex-1 space-y-8 text-2xl font-bold text-main">
-            <a href="#features" onClick={() => setMenuOpen(false)} className="hover:text-primary-600 transition-colors">Features</a>
-            <Link to="/about" onClick={() => setMenuOpen(false)} className="hover:text-primary-600 transition-colors">About Us</Link>
-            <a href="#pricing" onClick={() => setMenuOpen(false)} className="hover:text-primary-600 transition-colors">Pricing</a>
-            <div className="pt-8 flex flex-col items-center gap-4 w-full px-8">
-              <Link to="/login" onClick={() => setMenuOpen(false)} className="text-lg font-medium text-muted">Log in</Link>
-              <Link to="/register" onClick={() => setMenuOpen(false)} className="btn-primary w-full text-center">Sign up</Link>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* --- Minimalist Navigation --- */}
-      <nav className="relative z-20 px-4 py-4 md:px-12 md:py-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-primary-500/50 transition-shadow">
-            <MdOutlineTask className="text-white text-base sm:text-lg" />
-          </div>
-          <span className="text-lg sm:text-xl font-bold text-main tracking-tight">ProManage</span>
-        </Link>
-        
-        <div className="hidden md:flex items-center gap-8 text-sm font-bold text-muted">
-          <a href="#features" className="hover:text-primary-600 transition-colors">Features</a>
-          <Link to="/about" className="hover:text-primary-600 transition-colors">About Us</Link>
-          <a href="#pricing" className="hover:text-primary-600 transition-colors">Pricing</a>
-        </div>
-
-        <div className="flex items-center gap-2 sm:gap-4">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-xl bg-alt/50 border border-main text-main hover:bg-alt transition-all duration-300"
-            title="Toggle theme"
-          >
-            {theme === 'dark' ? <HiOutlineSun size={20} /> : <HiOutlineMoon size={20} />}
-          </button>
-
-          <button 
-            className="md:hidden p-2 text-main"
-            onClick={() => setMenuOpen(true)}
-          >
-            <HiOutlineMenu size={24} />
-          </button>
-
-          {user ? (
-            <Link to="/dashboard" className="btn-primary text-xs sm:text-sm px-4 sm:px-6 py-2 flex items-center gap-2">
-              Dashboard <HiOutlineArrowRight className="hidden xs:block" />
-            </Link>
-          ) : (
-            <div className="hidden sm:flex items-center gap-2 sm:gap-4">
-              <Link to="/login" className="text-xs sm:text-sm font-medium text-muted hover:text-main transition-colors">
-                Log in
-              </Link>
-              <Link to="/register" className="btn-primary text-xs sm:text-sm px-4 sm:px-6 py-2">
-                Sign up
-              </Link>
-            </div>
-          )}
-        </div>
-      </nav>
 
       {/* --- Hero Section --- */}
       <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 text-center pb-20">
