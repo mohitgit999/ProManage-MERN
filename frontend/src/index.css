@@ -10,17 +10,17 @@
 }
 
 .light {
-  --bg-main: #f8fafc;
+  --bg-main: #f1f5f9;
   --bg-alt: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.8);
+  --bg-card: #ffffff;
   --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-color: rgba(0, 0, 0, 0.05);
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.05);
+  --text-muted: #475569;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.12);
   --input-bg: #ffffff;
   --sidebar-hover: rgba(217, 70, 239, 0.1);
-  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
 }
 
 .dark {
