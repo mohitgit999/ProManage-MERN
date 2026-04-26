@@ -21,6 +21,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const isAboutActive = location.hash === '#about';
 
   const handleLogout = () => {
     logout();
@@ -58,7 +59,11 @@ const Navbar = () => {
             </Link>
             <Link
               to="/#about"
-              className="flex items-center gap-2 px-5 py-2 rounded-2xl text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-primary-600 border border-transparent hover:bg-primary-500/5 transition-all duration-300"
+              className={`flex items-center gap-2 px-5 py-2 rounded-2xl text-sm font-semibold transition-all duration-300 border ${
+                isAboutActive
+                  ? 'bg-primary-500/10 text-primary-600 dark:text-primary-300 border-primary-500/20'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-main hover:bg-primary-500/5 shadow-sm'
+              }`}
             >
               <HiOutlineInformationCircle className="text-lg" />
               About Us
@@ -130,7 +135,7 @@ const Navbar = () => {
             </Link>
             <Link
               to="/#about"
-              className="sidebar-link"
+              className={`sidebar-link ${isAboutActive ? 'bg-primary-500/10 text-primary-600' : ''}`}
               onClick={() => setMenuOpen(false)}
             >
               <HiOutlineInformationCircle /> About Us
