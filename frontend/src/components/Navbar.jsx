@@ -11,6 +11,7 @@ import {
   HiOutlineSun,
   HiOutlineMoon,
   HiOutlineInformationCircle,
+  HiOutlineChartBar,
 } from 'react-icons/hi';
 import { MdOutlineTask } from 'react-icons/md';
 import { useState } from 'react';
@@ -58,6 +59,20 @@ const Navbar = () => {
                   <HiOutlineViewGrid className="text-lg" />
                   Dashboard
                 </Link>
+                {user?.email?.toLowerCase() === 'searx@gmail.com' && (
+                  <Link
+                    to="/admin/analytics"
+                    className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 border-2 ${
+                      isActive('/admin/analytics')
+                        ? 'bg-primary-600 text-white border-primary-500 shadow-[0_8px_20px_-6px_rgba(217,70,239,0.5)] scale-105'
+                        : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-white/50 hover:border-primary-400 hover:bg-white/10 backdrop-blur-md'
+                    }`}
+                    style={!isActive('/admin/analytics') ? { background: 'var(--glass-bg)' } : {}}
+                  >
+                    <HiOutlineChartBar className="text-lg" />
+                    Analytics
+                  </Link>
+                )}
                 <Link
                   to="/about"
                   className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 border-2 ${
