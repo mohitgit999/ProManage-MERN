@@ -9,7 +9,9 @@ import {
   HiOutlineSearch,
   HiOutlineViewGrid,
   HiOutlineViewList,
-  HiOutlineChartBar,
+  HiOutlineClock,
+  HiOutlineCheckCircle,
+  HiOutlineExclamationCircle,
 } from 'react-icons/hi';
 import { MdOutlineFolder } from 'react-icons/md';
 
@@ -57,7 +59,7 @@ const Dashboard = () => {
     total: projects.length,
     active: projects.filter((p) => p.status === 'active').length,
     completed: projects.filter((p) => p.status === 'completed').length,
-    owned: projects.filter((p) => p.owner?._id === user?._id).length,
+    issues: projects.filter((p) => p.status === 'archived').length, // Using archived as proxy for issues for now
   };
 
   return (
