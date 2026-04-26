@@ -48,24 +48,24 @@ const Navbar = () => {
               <>
                 <Link
                   to="/dashboard"
-                  className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 border ${
+                  className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 border-2 ${
                     isActive('/dashboard')
                       ? 'bg-primary-600 text-white border-primary-500 shadow-[0_8px_20px_-6px_rgba(217,70,239,0.5)] scale-105'
-                      : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-white/10 hover:bg-white/10 backdrop-blur-md'
+                      : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-white/50 hover:border-primary-400 hover:bg-white/10 backdrop-blur-md'
                   }`}
-                  style={!isActive('/dashboard') ? { background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' } : {}}
+                  style={!isActive('/dashboard') ? { background: 'var(--glass-bg)' } : {}}
                 >
                   <HiOutlineViewGrid className="text-lg" />
                   Dashboard
                 </Link>
                 <Link
                   to="/about"
-                  className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 border ${
+                  className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 border-2 ${
                     isAboutActive
                       ? 'bg-primary-600 text-white border-primary-500 shadow-[0_8px_20px_-6px_rgba(217,70,239,0.5)] scale-105'
-                      : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-white/10 hover:bg-white/10 backdrop-blur-md'
+                      : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-white/50 hover:border-primary-400 hover:bg-white/10 backdrop-blur-md'
                   }`}
-                  style={!isAboutActive ? { background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' } : {}}
+                  style={!isAboutActive ? { background: 'var(--glass-bg)' } : {}}
                 >
                   <HiOutlineInformationCircle className="text-lg" />
                   About Us
@@ -74,25 +74,27 @@ const Navbar = () => {
             ) : (
               <>
                 <a
-                  href="#features"
-                  className="px-6 py-2.5 rounded-full text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-primary-600 transition-all duration-300 hover:bg-white/10"
+                  href="/#features"
+                  className="px-6 py-2.5 rounded-full text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-primary-600 transition-all duration-300 border-2 border-white/50 hover:border-primary-400 hover:bg-white/10 backdrop-blur-md"
+                  style={{ background: 'var(--glass-bg)' }}
                 >
                   Features
                 </a>
                 <Link
                   to="/about"
-                  className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 border ${
+                  className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 border-2 ${
                     isAboutActive
                       ? 'bg-primary-600 text-white border-primary-500 shadow-[0_8px_20px_-6px_rgba(217,70,239,0.5)] scale-105'
-                      : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-white/10 hover:bg-white/10 backdrop-blur-md'
+                      : 'text-gray-500 dark:text-gray-400 hover:text-primary-600 border-white/50 hover:border-primary-400 hover:bg-white/10 backdrop-blur-md'
                   }`}
-                  style={!isAboutActive ? { background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' } : {}}
+                  style={!isAboutActive ? { background: 'var(--glass-bg)' } : {}}
                 >
                   About Us
                 </Link>
                 <a
-                  href="#pricing"
-                  className="px-6 py-2.5 rounded-full text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-primary-600 transition-all duration-300 hover:bg-white/10"
+                  href="/#pricing"
+                  className="px-6 py-2.5 rounded-full text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-primary-600 transition-all duration-300 border-2 border-white/50 hover:border-primary-400 hover:bg-white/10 backdrop-blur-md"
+                  style={{ background: 'var(--glass-bg)' }}
                 >
                   Pricing
                 </a>
